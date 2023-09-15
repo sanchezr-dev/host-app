@@ -2,16 +2,16 @@ import { withSessionSsr } from "@/lib/session"
 import { GetServerSideProps } from "next"
 import dynamic from "next/dynamic"
 // @ts-ignore
-const RemotePage = dynamic(() => import("blue-app/home"))
+const RemotePage = dynamic(() => import("posts/home"))
 
-const BlueHomePage = (props: any) => {
+const PostsHomePage = (props: any) => {
   return <RemotePage {...props} />
 }
 
 export const getServerSideProps: GetServerSideProps = withSessionSsr(
   async function getServerSideProps(context) {
     // @ts-ignore
-    const remotePage = await import("blue-app/home")
+    const remotePage = await import("posts/home")
 
     if (remotePage.getServerSideProps) {
       const remotePageProps = await remotePage.getServerSideProps(context)
@@ -24,4 +24,4 @@ export const getServerSideProps: GetServerSideProps = withSessionSsr(
   },
 )
 
-export default BlueHomePage
+export default PostsHomePage

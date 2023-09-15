@@ -6,12 +6,12 @@ import { isAuthenticated } from "./lib/auth"
 import { IApiResponse } from "./types"
 
 export const config = {
-  matcher: ["/api/:path*", "/blue:path*", "/green:path*"],
+  matcher: ["/api/:path*", "/products:path*", "/posts:path*"],
 }
 
 const publicRoutes = ["/api/auth/callback", "/api/auth/logout"]
 
-const middleware = async (request: NextRequest) => {
+export const middleware = async (request: NextRequest) => {
   const response = NextResponse.next()
   const session = await getIronSession(request, response, sessionOptions)
   const requestedUrl = request.nextUrl.pathname
@@ -44,5 +44,3 @@ const middleware = async (request: NextRequest) => {
 
   return response
 }
-
-export default middleware
